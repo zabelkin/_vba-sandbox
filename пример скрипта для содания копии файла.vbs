@@ -6,30 +6,28 @@ Set objFSO  = WScript.CreateObject("Scripting.FileSystemObject")
 Dim objFile
 Dim an, an_1, cand_path
 
-an = "c:\\some_path\test.xlsb"
-an_1 = "\\shared_drive\some_shared_path\test.xlsb"
-cand_path = "c:\\path2\test2.xlsb"
+an = "\\ncm.lo\FileServer\FileServer\ltdm\DB_Analog\Analog.xlsb"
+an_1 = "\\ncm.lo\FileServer\FileServer\ltdm\DB_Analog\Analog-1.xlsb"
+cand_path = "\\srv-08\exchange\Analyze\Конкурентный_анализ\_кандидат - Analog.xlsb"
 
 Set objFile = objFSO.GetFile(an)
-objFile.Attributes = 0 ' R/W
+objFile.Attributes = 0
 Set objFile = objFSO.GetFile(an_1)
 objFile.Attributes = 0
 
 ' copy to -1
 objFSO.CopyFile an, an_1, True
-
 ' copy from  candidate
+
 objFSO.CopyFile cand_path, an, True
 
 Set objFile = objFSO.GetFile(an)
-objFile.Attributes = 1 ' R/O
+objFile.Attributes = 1
 Set objFile = objFSO.GetFile(an_1)
 objFile.Attributes = 1
 
-
 Set objFile = Nothing
 Set objFSO  = Nothing
-
 
 if not Err then
 	Wscript.Echo "All Ok"
